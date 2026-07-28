@@ -90,11 +90,13 @@ WSGI_APPLICATION = 'JobPortal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# Database Configuration (Render DATABASE_URL support + fallback)
-if os.getenv('DATABASE_URL'):
+# Database Configuration (Render DATABASE_URL & INTERNAL_DATABASE_URL support + fallback)
+db_url = os.getenv('DATABASE_URL') or os.getenv('INTERNAL_DATABASE_URL') or os.getenv('DATABASE_PRIVATE_URL')
+
+if db_url:
     DATABASES = {
         'default': dj_database_url.config(
-            default=os.getenv('DATABASE_URL'),
+            default=db_url,
             conn_max_age=600,
             ssl_require=False
         )
