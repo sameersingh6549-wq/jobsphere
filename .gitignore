@@ -1,0 +1,72 @@
+# ==========================================
+# Secret Environment & Credentials
+# ==========================================
+.env
+.env.local
+.env.*.local
+*.pem
+
+# ==========================================
+# Database & Migration Fixtures
+# ==========================================
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+datadump.json
+
+# ==========================================
+# User Uploaded Media Files & Logs
+# ==========================================
+media/
+media/*
+!media/.gitkeep
+*.log
+django_error.log
+
+# ==========================================
+# Python Bytecode & Environments
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==========================================
+# Frontend (React / Vite / Node.js)
+# ==========================================
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# ==========================================
+# IDE & System Files
+# ==========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

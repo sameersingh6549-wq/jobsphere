@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-light">
+    {% include "jobs/header.html" %}
+    <main class="container py-5">
+        <div class="dashboard-page">
+            <div class="mb-4">
+                <h1 class="h3 mb-1">Recruiter Dashboard</h1>
+                <p class="text-muted">Overview of your posted jobs, applicant activity, and profile status.</p>
+            </div>
+            <section class="dashboard-shell">
+                <div class="profile-card">
+                    <div class="profile-photo-wrap">
+                    {% if image and image.Profile_photo %}
+                    <div class="profile-photo">
+                        <img src="{{ image.Profile_photo.url }}" alt="Profile photo" class="profile-image">
+                    </div>
+                    {% else %}
+                    <div class="profile-photo">JD</div>
+                    {% endif %}
+                </div>
+                <div class="profile-info">
+                    <p class="profile-label">Recruiter Profile</p>
+                    <h1>{{ request.user.get_full_name|default:request.user.username }}</h1>
+                    <p class="bio">
+                        {{ image.Bio|default:"No bio added yet." }}
+                    </p>
+
+                    <div class="profile-tags">
+                        <span>Open to hire</span>
+                        <span>Remote</span>
+                        {% if job.first %}
+                        <span>{{ job.first.Job_type }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Total Jobs Posted</span>
+                    <h2>{{ total_job_posted }}</h2>
+                    <p>Jobs you have published</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Total Applicants on My Jobs</span>
+                    <h2>{{total_applicants}}</h2>
+                    <p>Applicants who applied to your listings</p>
+                </div>
+
+                <div class="stat-card">
+                    <span class="stat-label">Total Applications Made</span>
+                    <h2>{{total_application_made}}</h2>
+                    <p>Applications submitted by you</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

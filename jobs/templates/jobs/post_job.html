@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if job %}Edit Job{% else %}Post Job{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-light">
+    {% include "jobs/header.html" %}
+    <main class="container py-5">
+        <div class="card shadow-sm rounded-4 border-0 mx-auto" style="max-width: 900px;">
+            <div class="card-header bg-primary text-white py-4 px-4">
+                <h2 class="mb-0">{% if job %}Edit Job{% else %}Post a New Job{% endif %}</h2>
+                <p class="mb-0 opacity-85">Use a clear job title and description to attract the right candidates.</p>
+            </div>
+            <div class="card-body p-4">
+                {% include "jobs/messages.html" %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="title" class="form-label">Job Title</label>
+                            <input type="text" id="title" name="title" class="form-control" value="{{ job.Title|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company" class="form-label">Company Name</label>
+                            <input type="text" id="company" name="company_name" class="form-control" value="{{ job.Company_name|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" id="location" name="location" class="form-control" value="{{ job.Location|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="salary" class="form-label">Salary</label>
+                            <input type="number" id="salary" name="salary" class="form-control" value="{{ job.Salary|default:'' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="job_type" class="form-label">Job Type</label>
+                            <select id="job_type" name="job_type" class="form-select" required>
+                                <option value="Full Time" {% if job.Job_type == 'Full Time' %}selected{% endif %}>Full Time</option>
+                                <option value="Part Time" {% if job.Job_type == 'Part Time' %}selected{% endif %}>Part Time</option>
+                                <option value="Internship" {% if job.Job_type == 'Internship' %}selected{% endif %}>Internship</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="experience" class="form-label">Experience</label>
+                            <input type="text" id="experience" name="experience" class="form-control" value="{{ job.Experience|default:'' }}" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="description" class="form-label">Job Description</label>
+                            <textarea id="description" name="description" class="form-control" rows="6" required>{{ job.Description|default:'' }}</textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit Job</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

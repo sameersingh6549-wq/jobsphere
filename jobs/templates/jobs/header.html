@@ -1,0 +1,30 @@
+<header class="site-header py-3">
+    <nav class="container d-flex flex-wrap justify-content-center justify-content-md-start align-items-center gap-2">
+        <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
+        <span class="nav-separator">|</span>
+        <a class="nav-link{% if request.path == '/job/' %} active{% endif %}" href="/job/">Jobs</a>
+        {% if request.user.is_authenticated %}
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path|slice:":17" == '/accounts/profile' %} active{% endif %}" href="/accounts/profile">Create Your Profile</a>
+            <span class="nav-separator">|</span>
+            <a class="nav-link" href="/accounts/logout">Logout</a>
+        {% else %}
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path|slice:":12" == '/accounts/login' %} active{% endif %}" href="/accounts/login">Login</a>
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path|slice:":13" == '/accounts/signup' %} active{% endif %}" href="/accounts/signup">Signup</a>
+        {% endif %}
+        {% if request.user.is_authenticated and user_profile and user_profile.Role == 'Recruiter' %}
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path|slice:":8" == '/postjob' %} active{% endif %}" href="/postjob/">Post Job</a>
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path == '/my_posted_jobs/' %} active{% endif %}" href="/my_posted_jobs/">My Posted Jobs</a>
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path == '/dashboard/' %} active{% endif %}" href="/dashboard/">Dashboard</a>
+        {% endif %}
+        {% if request.user.is_authenticated and user_profile and user_profile.Role != 'Recruiter' %}
+            <span class="nav-separator">|</span>
+            <a class="nav-link{% if request.path == '/my_application/' %} active{% endif %}" href="/my_application/">My Applications</a>
+        {% endif %}
+    </nav>
+</header>

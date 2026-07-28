@@ -1,0 +1,14 @@
+{% include "jobs/header.html" %}
+{% if applicants %}
+<ul>
+  {% for applicant in applicants %}
+    <li>
+      <strong>{{ applicant.user.get_full_name|default:applicant.user.username }}</strong><br>
+      <small>{{ applicant.user.email }}</small><br>
+      <small>Applied: {{ applicant.Applied_at|date:"M d, Y" }}</small>
+    </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No applicants yet.</p>
+{% endif %}
