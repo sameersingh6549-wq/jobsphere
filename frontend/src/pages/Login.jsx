@@ -24,7 +24,8 @@ export default function Login() {
     setSubmitting(false);
 
     if (res.success) {
-      navigate(from, { replace: true });
+      const target = (from === '/login' || from === '/register') ? '/dashboard' : from;
+      navigate(target, { replace: true });
     }
   };
 

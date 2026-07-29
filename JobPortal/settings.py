@@ -179,11 +179,7 @@ SIMPLE_JWT = {
 }
 
 # CORS Configuration for React Frontend
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Vite Dev Server
-    "http://127.0.0.1:5173",
-    "http://localhost:3000",  # CRA / Next.js if used
-]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 # Email Configuration (Gmail SMTP)
