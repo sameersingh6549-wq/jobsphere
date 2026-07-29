@@ -16,3 +16,6 @@ python manage.py collectstatic --noinput
 
 echo "=== 4. Running PostgreSQL Database Migrations ==="
 python manage.py migrate
+
+echo "=== 5. Loading Data Fixtures into PostgreSQL ==="
+python manage.py loaddata datadump.json || true
