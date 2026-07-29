@@ -17,13 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from django.conf import settings
-from django.conf.urls.static import static
 from django.views.generic import TemplateView
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/accounts/', include('accounts.api_urls')),
     path('api/v1/jobs/', include('jobs.api_urls')),
+    
+    # Media file route for candidate resumes & profile photo downloads in production
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     
     # Catch-all route to serve the modern React SaaS Single Page Application (index.html)
     re_path(
@@ -32,5 +35,3 @@ urlpatterns = [
         name='react_spa'
     ),
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

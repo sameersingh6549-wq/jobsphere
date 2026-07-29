@@ -19,3 +19,6 @@ python manage.py migrate
 
 echo "=== 5. Loading Data Fixtures into PostgreSQL ==="
 python manage.py loaddata datadump.json || true
+
+echo "=== 6. Ensuring Media Storage Directories Exist ==="
+mkdir -p media media/resumes media/application_resumes media/profile_photo
