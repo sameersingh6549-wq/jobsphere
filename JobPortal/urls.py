@@ -27,7 +27,7 @@ urlpatterns = [
     
     # Catch-all route to serve the modern React SaaS Single Page Application (index.html)
     re_path(
-        r'^(?:(?!admin/|api/|media/|static/).)*$',
+        r'^(?:(?!admin/|api/|media/|static/|assets/).)*$',
         TemplateView.as_view(template_name='index.html'),
         name='react_spa'
     ),
